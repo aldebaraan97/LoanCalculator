@@ -2,6 +2,8 @@ package com.example.loancalculator;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -38,5 +40,21 @@ public class HelloApplication extends Application {
         gridPane.add(new Label("Total Payment:"), 0, 4);
         gridPane.add(tfTotalPayment, 1, 4);
         gridPane.add(btCalculate, 1, 5);
+
+        // Set properties for UI
+        gridPane.setAlignment(Pos.CENTER);
+        tfAnnualInterestRate.setAlignment(Pos.BOTTOM_RIGHT);
+        tfNumberOfYears.setAlignment(Pos.BOTTOM_RIGHT);
+        tfLoanAmount.setAlignment(Pos.BOTTOM_RIGHT);
+        tfMonthlyPayment.setAlignment(Pos.BOTTOM_RIGHT);
+        tfTotalPayment.setAlignment(Pos.BOTTOM_RIGHT);
+        tfMonthlyPayment.setEditable(false);
+        tfTotalPayment.setEditable(false);
+        GridPane.setHalignment(btCalculate, HPos.RIGHT);
+
+        // TODO: try to shorten the code above using arrays and for loops
+
+        // Process events
+        btCalculate.setOnAction(e -> CalculateLoanPayment());
     }
 }

@@ -24,7 +24,7 @@ public class HelloApplication extends Application {
     private Button btCalculate = new Button("Calculate");
 
     @Override // Override the start method in the Application class
-    public void start(Stage stage) {
+    public void start(Stage primaryStage) {
         // Create UI
         GridPane gridPane = new GridPane();
         gridPane.setHgap(5);
@@ -55,6 +55,27 @@ public class HelloApplication extends Application {
         // TODO: try to shorten the code above using arrays and for loops
 
         // Process events
-        btCalculate.setOnAction(e -> CalculateLoanPayment());
+        btCalculate.setOnAction(e -> calculateLoanPayment());
+
+        // Create a scene and place it in the stage
+        Scene scene = new Scene(gridPane, 400, 250);
+        primaryStage.setTitle("LoanCalculator"); // Set title
+        primaryStage.setScene(scene); // Place the scene in the stage
+        primaryStage.show(); // Display the stage
+    }
+
+    private void calculateLoanPayment() {
+        // Get vales from text fields
+        double interest = Double.parseDouble(tfAnnualInterestRate.getText());
+        int year = Integer.parseInt(tfNumberOfYears.getText());
+        double loanAmount = Double.parseDouble(tfLoanAmount.getText());
+
+        // Create a loan object
+        Loan loan = new Loan(interest, year, loanAmount);
+
+        // Display monthly payment and total payment
+        tfMonthlyPayment.setText(String.format("$%.2f", loan.getMonthlyPayment()));
+        tfTotalPayment.setText(String.format("$%.2f", loan.getTotalPayment()));
+
     }
 }
